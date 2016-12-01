@@ -1,4 +1,4 @@
-#include <stdlib>
+#include <stdlib.h>
 
 void azaza(char azaza){
 	return 'azaza';
