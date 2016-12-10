@@ -9,13 +9,13 @@ typedef struct  monster{
 
 void scan_for_monstrers(monster * monster_db,char* map){
 	int i,j;
-	for(i=0;i<MAX_X;i++){
-		for(j=0;j<MAX_Y;j++){
+	for(i=0;i<MAX_Y;i++){
+		for(j=0;j<MAX_X;j++){
 			if(map[i][j]=='@'){
 				number_of_monsters++;
 				monster_db=realloc(monster_db,sizeof(monster));
-				monster_db->x=i;
-				monster_db->y=j;
+				monster_db->x=j;
+				monster_db->y=i;
 				monster_db->alive=1;
 			}
 		}
