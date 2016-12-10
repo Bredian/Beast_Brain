@@ -2,15 +2,15 @@
 #include <string.h>
 #include <stdio.h>
 
-const int W      = 12;         // ширина рабочего поля
-const int H      =  8;         // высота рабочего поля
-const char WALL   = '#';         // непроходимая ячейка
-const char BLANK  = '.';         // свободная непомеченная ячейка
-const char DOG = '@';         //ячейка с монстром
+#define W 5         // ширина рабочего поля
+#define H 5         // высота рабочего поля
+#define WALL -2         // непроходимая ячейка
+#define BLANK -1         // свободная непомеченная ячейка
+#define DOG '@'         //ячейка с монстром
 
 int px[W * H], py[W * H];      // координаты ячеек, входящих в путь
 int len;                       // длина пути
-char map[H][W];                // рабочее поле
+int map[H][W];                // рабочее поле
 
 
 // Перед вызовом lee() массив map заполнен значениями WALL и BLANK
@@ -19,10 +19,17 @@ void init(){
 int i, j;
 
 for(i = 0; i < H; i++)
-
-{
-    for(j = 0; j < H; j++ ) scanf("%c",&map[i][j]);
+    for(j = 0; j < W; j++ )
+		scanf("%d", &(map[i][j]));
 }
+
+void print_map() {
+	int i,j;
+	for(i = 0; i < H; i++) {
+		for(j = 0; j < W; j++) printf("%d", map[i][j]);
+		printf("\n");	
+		}
+	return;
 }
 
 int lee(int ax, int ay, int bx, int by)   // поиск пути из ячейки (ax, ay) в ячейку (bx, by)
@@ -32,8 +39,11 @@ int lee(int ax, int ay, int bx, int by)   // поиск пути из ячейк
     int d, x, y, k;
     int stop;
     
-    if (map[ay][ax] == WALL || map[by][bx] == WALL) return -1;  // ячейка (ax, ay) или (bx, by) - стена
-    
+    if (map[ay][ax] == WALL || map[by][bx] == WALL) {
+		printf("%d %d\n",map[ay][ax], map[by][bx]);
+		return -1;  // ячейка (ax, ay) или (bx, by) - стена
+	}
+	
     // распространение волны
     d = 0;
     map[ay][ax] = 0;            // стартовая ячейка помечена 0
@@ -46,19 +56,22 @@ int lee(int ax, int ay, int bx, int by)   // поиск пути из ячейк
                     for ( k = 0; k < 4; ++k )                    // проходим по всем непомеченным соседям
                     {
                         int iy=y + dy[k], ix = x + dx[k];
-                        if ( iy >= 0 && iy < H && ix >= 0 && ix < W &&
-                            map[iy][ix] == BLANK )
+                        if ( iy >= 0 && iy < H && ix >= 0 && ix < W && map[iy][ix] == BLANK )
                         {
                             stop = 0;              // найдены непомеченные клетки
-                            map[iy][ix] = d + 1;      // распространяем волну
+                            map[iy][ix] = d + 1;
+                            print_map();      // распространяем волну
                         }
                     }
                 }
         d++;
     } while ( !stop && map[by][bx] == BLANK );
     
-    if (map[by][bx] == BLANK) return -1;  // путь не найден
-    
+    if (map[by][bx] == BLANK) {
+		printf("NOWAY\n");
+		return -1;  // путь не найден
+	}
+	
     // восстановление пути
     len = map[by][bx];            // длина кратчайшего пути из (ax, ay) в (bx, by)
     x = bx;
@@ -72,8 +85,7 @@ int lee(int ax, int ay, int bx, int by)   // поиск пути из ячейк
         for (k = 0; k < 4; ++k)
         {
             int iy=y + dy[k], ix = x + dx[k];
-            if ( iy >= 0 && iy < H && ix >= 0 && ix < W &&
-                map[iy][ix] == d)
+            if ( iy >= 0 && iy < H && ix >= 0 && ix < W && map[iy][ix] == d)
             {
                 x = x + dx[k];
                 y = y + dy[k];           // переходим в ячейку, которая на 1 ближе к старту
@@ -83,14 +95,15 @@ int lee(int ax, int ay, int bx, int by)   // поиск пути из ячейк
     }
     px[0] = ax;
     py[0] = ay;                    // теперь px[0..len] и py[0..len] - координаты ячеек пути
+    
     int i;
-    for(i=0;i<len;i++){
-        printf("%c %c",px[i],py[i]);
-    }
+    for(i=0;i<len;i++)
+        printf("%d %d\n",px[i],py[i]);
+    
     return 0;
 }
 
 int main(){
     init();
-    lee(3, 6, 3, 0);                 // поиск пути из ячейки (3,6) в ячейку (3, 0) (см. рис.)
+    lee(0, 0, 3, 3);                 // поиск пути из ячейки (3,6) в ячейку (3, 0) (см. рис.)
 }
