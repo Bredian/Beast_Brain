@@ -8,10 +8,16 @@ typedef struct treasue{
 } treasure;
 
 void scan_for_treasures(treasure* treasure_db, char** map){
-	treasure_db=malloc(20*sizeof(treasue))
 	int i,j;
-	for(i=0;i<MAP_X;i++){
-		for(j=0;j<MAP_Y;j++){
+	for(i=0;i<MAX_X;i++){
+		for(j=0;j<MAX_Y;j++){
 			if(map[i][j]=='*'){
-				
+				treasure_db=realloc(sizeof(treasue));
+				treasure_db.x=j;
+				treasure_db.y=i;
+				treasure_db.existance=1;
+			}
+		}
+	}
+	return;
 }
