@@ -45,7 +45,7 @@ treasure* treasure_db;
 /*maps*/
 
 char (*main_map)[max_y][max_x]);
-char (*copied_map)[max_y][max_x]);
+char (*monster_map)[max_y][max_x]);
 
 /*functions*/
 
@@ -56,12 +56,15 @@ void refresh_monster_db(monster* monster_db, char (*map)[max_y][max_x]);
 
 treasure* find_nearest_treasure(point from, treasure* treasure_db);	//decartian distance
 
+																//both wave functions and monster_zones_update also change the maps
 int wave_scan(point from, int dist, char (*map)[max_y][max_x]);	//returns number of treasures in range
 int wave_scan_to_point(point from, point to, char (*map)[max_y][max_x]);	//returns number of steps
 
 path trace(point from, char (*map)[max_y][max_x]);
 path trace_with_monsters(point from, char (*monster_map)[max_y][max_x], char (*map)[max_y][max_x]);
 
-void monster_zones_update(char (*monster_map)[max_y][max_x], monster* monster_db);	//idk what's it for
+void monster_zones_update(char (*monster_map)[max_y][max_x], monster* monster_db);	//updates 
+
+void init();
 
 void do_next_step(int cur_x, int cur_y, int *command);	//main magic here
