@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <brain.h>
-void scan_for_treasures(treasure* treasure_db, char* map){
+void scan_for_treasures(treasure* treasure_db, char** map){
     int i,j;
     for(i=0;i<MAX_Y;i++){
         for(j=0;j<MAX_X;j++){
