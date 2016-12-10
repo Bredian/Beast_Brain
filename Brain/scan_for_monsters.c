@@ -1,14 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct  monster{
-	int x;
-	int y;
-	int alive;
-} monster;
-
-void scan_for_monstrers(monster * monster_db,char** map){
+#include <brain.h>
+void scan_for_monstrers(monster * monster_db,char (*map)[MAP_Y][MAP_X]){
 	int i,j;
+	number_of_monsters=0;
 	for(i=0;i<MAX_Y;i++){
 		for(j=0;j<MAX_X;j++){
 			if(map[i][j]=='@'){
