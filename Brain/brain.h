@@ -26,14 +26,14 @@ typedef _treasure treasure;
 
 /*functions*/
 
-void scan_for_treasures(treasure* treasure_db, char* map);
-void scan_for_monsters(monster* monster_db, char* map);
-void refresh_treasure_db(treasure* treasure_db, char* map);
-void refresh_monster_db(monster* monster_db, char* map);
+void scan_for_treasures(treasure* treasure_db, char (*map)[MAX_Y][MAX_X]);
+void scan_for_monsters(monster* monster_db, char (*map)[MAX_Y][MAX_X]);
+void refresh_treasure_db(treasure* treasure_db, char (*map)[MAX_Y][MAX_X]);
+void refresh_monster_db(monster* monster_db, char (*map)[MAX_Y][MAX_X]);
 
 treasure* find_nearest_treasure(point from, treasure* treasure_db);	//decartian distance
 
-int wave_scan(point from, int range, char* map);	//returns number of treasures in range
-int wave_scan_to_point(point from, point to, char* map);	//returns number of steps
+int wave_scan(point from, int dist, char (*map)[MAX_Y][MAX_X]);	//returns number of treasures in range
+int wave_scan_to_point(point from, point to, char (*map)[MAX_Y][MAX_X]);	//returns number of steps
 
-void monster_update(char* map; monster* monster_db);	//idk what's it for
+void monster_update(char (*map)[MAX_Y][MAX_X], monster* monster_db);	//idk what's it for
