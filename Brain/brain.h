@@ -41,3 +41,5 @@ int wave_scan(point from, int dist, char (*map)[MAX_Y][MAX_X]);	//returns number
 int wave_scan_to_point(point from, point to, char (*map)[MAX_Y][MAX_X]);	//returns number of steps
 
 void monster_update(char (*map)[MAX_Y][MAX_X], monster* monster_db);	//idk what's it for
+
+int do_next_step(int cur_x, int cur_y, int *command);	//magic here
