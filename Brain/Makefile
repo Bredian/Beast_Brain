@@ -1,6 +1,6 @@
 all: brain
 	gcc -c player.c
-	gcc treasures_db.o monsters_db.o waves.o brain.o player.o -o player
+	gcc treasures_db.o monsters_db.o waves.o brain.o player.o pathfind.o -o player
 	g++ ../server/server.c -o ../server/server
 
 clean:
@@ -8,7 +8,7 @@ clean:
 	rm -f player
 	rm -f ../server/server
 
-brain: treasures monsters waves
+brain: treasures monsters waves pathfind
 	gcc -c brain.c
 
 treasures:
@@ -19,3 +19,6 @@ monsters:
 
 waves:
 	gcc -c waves.c
+
+pathfind:
+	gcc -c pathfind.c
