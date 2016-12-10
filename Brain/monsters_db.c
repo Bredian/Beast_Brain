@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include "brain.h"
 
-void scan_for_monsters(monster* monster_db, char (*map)[MAX_Y][MAX_X]){
+void scan_for_monsters(monster* monster_db, char (*map)[max_y][max_x]){
 	int i, j;
 	number_of_monsters = 0;
-	for(i = 0; i < MAX_Y; i++) {
-		for(j = 0; j < MAX_X; j++) {
+	for(i = 0; i < max_y; i++) {
+		for(j = 0; j < max_x; j++) {
 			if( (*map)[i][j] == '@' ){
 				number_of_monsters++;
 				monster_db = realloc(monster_db, number_of_monsters*sizeof(monster));
@@ -18,7 +18,7 @@ void scan_for_monsters(monster* monster_db, char (*map)[MAX_Y][MAX_X]){
 	return;
 }
 
-void refresh_monster_db(monster* monster_db, char (*map)[MAX_Y][MAX_X]) {
+void refresh_monster_db(monster* monster_db, char (*map)[max_y][max_x]) {
 	int i, j, x, y;
 	int dx[5] = {0, -1, 0, 1, 0};	//step from current position to
 	int dy[5] = {0, 0, 1, 0, -1};	//nowhere, left, up, right, down
