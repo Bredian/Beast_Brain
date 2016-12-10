@@ -1,4 +1,5 @@
-
+#include <stdlib.h>
+#include "brain.h"
 
 void scan_for_monsters(monster* monster_db, char (*map)[MAX_Y][MAX_X]){
 	int i, j;
