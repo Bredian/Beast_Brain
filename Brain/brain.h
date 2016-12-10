@@ -44,7 +44,6 @@ treasure* treasure_db;
 
 /*maps*/
 
-char (*main_map)[max_y][max_x]);
 char (*monster_map)[max_y][max_x]);
 
 /*functions*/
