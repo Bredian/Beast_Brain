@@ -23,12 +23,29 @@ struct _treasure {
 
 typedef struct _treasure treasure;
 
+struct _path {
+	int len;
+	point* steps;
+}
+
+typedef struct _path path;
+
 /*variables*/
+
+int max_x;	//double the MAXes defined in player.c
+int max_y;
+
+/*DBs*/
 
 int number_of_treasures;
 int number_of_monsters;
-int max_x;
-int max_y;
+monster* monster_db;
+treasure* treasure_db;
+
+/*maps*/
+
+char (*main_map)[max_y][max_x]);
+char (*copied_map)[max_y][max_x]);
 
 /*functions*/
 
@@ -42,6 +59,9 @@ treasure* find_nearest_treasure(point from, treasure* treasure_db);	//decartian 
 int wave_scan(point from, int dist, char (*map)[max_y][max_x]);	//returns number of treasures in range
 int wave_scan_to_point(point from, point to, char (*map)[max_y][max_x]);	//returns number of steps
 
-void monster_update(char (*map)[max_y][max_x], monster* monster_db);	//idk what's it for
+path trace(point from, char (*map)[max_y][max_x]);
+path trace_with_monsters(point from, char (*monster_map)[max_y][max_x], char (*map)[max_y][max_x]);
+
+void monster_zones_update(char (*monster_map)[max_y][max_x], monster* monster_db);	//idk what's it for
 
 void do_next_step(int cur_x, int cur_y, int *command);	//main magic here
