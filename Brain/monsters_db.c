@@ -7,7 +7,7 @@ void scan_for_monsters(monster* monster_db, char (*map)[MAX_Y][MAX_X]){
 		for(j = 0; j < MAX_X; j++) {
 			if( (*map)[i][j] == '@' ){
 				number_of_monsters++;
-				monster_db = realloc(monster_db, number_of_monsters*sizeof(monster));
+				monster_db = 	realloc(monster_db, number_of_monsters*sizeof(monster));
 				monster_db[number_of_monsters].y = i;
 				monster_db[number_of_monsters].x = j;
 				monster_db[number_of_monsters].alive = 1;
