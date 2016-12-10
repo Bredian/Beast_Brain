@@ -59,8 +59,8 @@ treasure* find_nearest_treasure(point from, treasure* treasure_db);	//decartian 
 int wave_scan(point from, int dist, char (*map)[max_y][max_x]);	//returns number of treasures in range
 int wave_scan_to_point(point from, point to, char (*map)[max_y][max_x]);	//returns number of steps
 
-path trace(point from, char (*map)[max_y][max_x]);
-path trace_with_monsters(point from, char (*monster_map)[max_y][max_x], char (*map)[max_y][max_x]);
+path trace(point trace_to, char (*map)[max_y][max_x]);
+path trace_with_monsters(point trace_to, char (*monster_map)[max_y][max_x], char (*map)[max_y][max_x]);
 
 void monster_zones_update(char (*monster_map)[max_y][max_x], monster* monster_db);	//updates 
 
