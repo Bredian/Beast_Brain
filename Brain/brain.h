@@ -22,9 +22,11 @@ struct _treasure {
 }
 
 typedef _treasure treasure;
+
 /*variables*/
-int number_of_treasures=0;
-int number_of_monsters=0;
+
+int number_of_treasures;
+int number_of_monsters;
 
 /*functions*/
 
