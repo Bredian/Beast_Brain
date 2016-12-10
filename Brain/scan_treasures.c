@@ -13,8 +13,8 @@ void scan_for_treasures(treasure* treasure_db, char* map){
         for(j=0;j<MAX_Y;j++){
             if(map[i][j]=='*'){
                 treasure_db=realloc(treasure_db,sizeof(treasure));
-                treasure_db->x=j;
-                treasure_db->y=i;
+                treasure_db->x=i;
+                treasure_db->y=j;
                 treasure_db->exist=1;
             }
         }
