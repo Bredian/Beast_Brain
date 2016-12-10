@@ -1,3 +1,4 @@
+#include <stdlib.h>
 void scan_for_treasures(treasure* treasure_db, char (*map)[MAX_Y][MAX_X]) {
 	int i, j;
 	number_of_treasures = 0;
