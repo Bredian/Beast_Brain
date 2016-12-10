@@ -3,7 +3,7 @@
 struct _point {
 	int x;
 	int y;
-}
+};
 
 typedef _point point;
 
@@ -11,7 +11,7 @@ struct _monster {
 	int x;
 	int y;
 	int alive;
-}
+};
 
 typedef _monster monster;
 
@@ -19,7 +19,7 @@ struct _treasure {
 	int x;
 	int y;
 	int exist;
-}
+};
 
 typedef _treasure treasure;
 
