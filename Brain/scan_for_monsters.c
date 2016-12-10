@@ -12,6 +12,7 @@ void scan_for_monstrers(monster * monster_db,char* map){
 	for(i=0;i<MAX_X;i++){
 		for(j=0;j<MAX_Y;j++){
 			if(map[i][j]=='@'){
+				number_of_monsters++;
 				monster_db=realloc(monster_db,sizeof(monster));
 				monster_db->x=i;
 				monster_db->y=j;
