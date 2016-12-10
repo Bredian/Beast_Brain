@@ -1,7 +1,8 @@
 #include "brain.h"
+
 /* wave functions */
 
-int wave_scan(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//returns number of treasures in range
+int wave_scan_to_dist(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//returns number of treasures in range
 	int d, k, x, y, treas_count = 0;
 	int stop_flag = 0;
 
@@ -17,7 +18,7 @@ int wave_scan(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//returns numbe
 		stop_flag = 1;               // предполагаем, что все свободные клетки уже помечены
 		for ( y = 0; y < MAX_Y; ++y )
 			for ( x = 0; x < MAX_X; ++x )
-				if ( map[y][x] == 'A' + d )                         // ячейка (x, y) помечена числом d
+				if ( (*map)[y][x] == 'A' + d )                         // ячейка (x, y) помечена числом d
 				{
 					for ( k = 0; k < 4; ++k )                    // проходим по всем непомеченным соседям
 					{
@@ -29,7 +30,7 @@ int wave_scan(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//returns numbe
 
 							if((*map)[iy][ix] == '*') treas_count++;
 
-							map[iy][ix] = 'A' + d + 1;      // распространяем волну
+							(*map)[iy][ix] = 'A' + d + 1;      // распространяем волну
 						}
 					}
 				}
