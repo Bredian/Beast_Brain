@@ -41,5 +41,36 @@ int wave_scan_to_dist(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//retur
 }
 
 int wave_scan_to_point(point from, point to, char (*map)[MAX_Y][MAX_X]){	//returns number of steps
+	int d, k, x, y, treas_count = 0;
+	int stop_flag = 0;
 
+	int ix, iy;
+
+	int dx[4] = {-1, 0, 1, 0};	//step from current position to
+	int dy[4] = {0, 1, 0, -1};	//left, up, right, down
+
+
+	d = 0;
+	(*map)[from.x][from.y] = 'A';
+	do {
+		for ( y = 0; y < MAX_Y; ++y )
+			for ( x = 0; x < MAX_X; ++x )
+				if ( (*map)[y][x] == 'A' + d )                         // ячейка (x, y) помечена числом d
+				{
+					for ( k = 0; k < 4; ++k )                    // проходим по всем непомеченным соседям
+					{
+						iy = y + dy[k];
+						ix = x + dx[k];
+						if ( iy >= 0 && iy < MAX_Y && ix >= 0 && ix < MAX_X && (*map)[iy][ix] != '#' && (*map)[iy][ix] < 'A' )
+						{
+							if( ix = to.x && iy = to.y ) stop_flag = 1;
+
+							(*map)[iy][ix] = 'A' + d + 1;      // распространяем волну
+						}
+					}
+				}
+		d++;
+	} while( !stop_flag );
+	
+	return d;
 }
