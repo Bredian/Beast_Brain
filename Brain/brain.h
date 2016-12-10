@@ -5,7 +5,7 @@ struct _point {
 	int y;
 };
 
-typedef _point point;
+typedef struct _point point;
 
 struct _monster {
 	int x;
@@ -13,7 +13,7 @@ struct _monster {
 	int alive;
 };
 
-typedef _monster monster;
+typedef struct _monster monster;
 
 struct _treasure {
 	int x;
@@ -21,7 +21,7 @@ struct _treasure {
 	int exist;
 };
 
-typedef _treasure treasure;
+typedef struct _treasure treasure;
 
 /*variables*/
 

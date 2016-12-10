@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <brain.h>
 void refresh_treasure_db(treasure* treasure_db, char (*map)[MAP_Y][MAP_X]){
 	int i;
