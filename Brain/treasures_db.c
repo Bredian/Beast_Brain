@@ -7,9 +7,9 @@ void scan_for_treasures(treasure* treasure_db, char (*map)[MAX_Y][MAX_X]){
             if((*map)[i][j]=='*'){
                 number_of_treasures++;
                 treasure_db=realloc(treasure_db,number_of_treasures*sizeof(treasure));
-                treasure_db->x=j;
-                treasure_db->y=i;
-                treasure_db->exist=1;
+                treasure_db[number_of_treasures].x=j;
+                treasure_db[number_of_treasures].y=i;
+                treasure_db[number_of_treasures].exist=1;
             }
         }
     }
