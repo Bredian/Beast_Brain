@@ -44,4 +44,4 @@ int wave_scan_to_point(point from, point to, char (*map)[max_y][max_x]);	//retur
 
 void monster_update(char (*map)[max_y][max_x], monster* monster_db);	//idk what's it for
 
-int do_next_step(int cur_x, int cur_y, int *command);	//main magic here
+void do_next_step(int cur_x, int cur_y, int *command);	//main magic here

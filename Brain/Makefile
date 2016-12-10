@@ -1,7 +1,7 @@
 all: brain
 	gcc -c player.c
-	gcc treasures.o monsters.o waves.o brain.o player.o -o player
-	g++ ../server/server.c -o server/server
+	gcc treasures_db.o monsters_db.o waves.o brain.o player.o -o player
+	g++ ../server/server.c -o ../server/server
 
 clean:
 	rm -f *.o
@@ -10,7 +10,7 @@ clean:
 
 brain: treasures monsters waves
 	gcc -c brain.c
-	
+
 treasures:
 	gcc -c treasures_db.c
 
