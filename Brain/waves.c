@@ -41,7 +41,7 @@ int wave_scan_to_dist(point from, int dist, char (*map)[MAX_Y][MAX_X]) {	//retur
 }
 
 int wave_scan_to_point(point from, point to, char (*map)[MAX_Y][MAX_X]){	//returns number of steps
-	int d, k, x, y, treas_count = 0;
+	int d, k, x, y;
 	int stop_flag = 0;
 
 	int ix, iy;
@@ -61,9 +61,10 @@ int wave_scan_to_point(point from, point to, char (*map)[MAX_Y][MAX_X]){	//retur
 					{
 						iy = y + dy[k];
 						ix = x + dx[k];
+						
 						if ( iy >= 0 && iy < MAX_Y && ix >= 0 && ix < MAX_X && (*map)[iy][ix] != '#' && (*map)[iy][ix] < 'A' )
 						{
-							if( ix = to.x && iy = to.y ) stop_flag = 1;
+							if( ix == to.x && iy == to.y ) stop_flag = 1;
 
 							(*map)[iy][ix] = 'A' + d + 1;      // распространяем волну
 						}
