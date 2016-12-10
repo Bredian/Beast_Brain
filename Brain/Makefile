@@ -22,3 +22,4 @@ waves:
 
 pathfind:
 	gcc -c pathfind.c
+
