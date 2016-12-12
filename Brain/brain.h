@@ -3,7 +3,7 @@
 
 #include "header.h"
 
-void init() {
+void init() {					//TODO: write location finding
 	main_map = (char**)map;
 	max_x = MAX_X;
 	max_y = MAX_Y;

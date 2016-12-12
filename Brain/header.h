@@ -34,6 +34,7 @@ typedef struct _path path;
 
 int max_x;	//double the MAXes defined in player.c
 int max_y;
+point location;
 
 /*DBs*/
 

@@ -3,8 +3,13 @@
 /* wave functions */
 
 int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of treasures in range
-	int d, k, x, y, treas_count = 0;
-	int stop_flag = 0;
+	int d, k, x, y, number = -1;
+	int stop_flag = 0, treas_flag = 0;
+
+	point nearest_treasure;
+
+	nearest_treasure.x = -1;
+	nearest_treasure.y = -1;
 
 	int ix, iy;
 
@@ -28,7 +33,11 @@ int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of tr
 					{
 							stop_flag = 0;              // найдены непомеченные клетки
 
-							if(map[iy][ix] == '*') treas_count++;
+							if(map[iy][ix] == '*' && !treas_flag) {
+								nearest_treasure.x = x;
+								nearest_treasure.y = y;
+								treas_flag = 1;
+							}
 
 							map[iy][ix] = 'A' + d + 1;      // распространяем волну
 						}
@@ -37,7 +46,11 @@ int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of tr
 		d++;
 	} while( !stop_flag && d <= dist );
 
-	return treas_count;
+	for(i = 0; i < number_of_treasures; i++)
+		if(treasure_db[i].x == nearest_treasure.x && treasure_db[i].y == nearest_treasure.y)
+			number = i;
+	
+	return number;
 }
 
 int wave_scan_to_point(point from, point to, char **map){	//returns number of steps
