@@ -3,7 +3,7 @@
 
 #include "header.h"
 
-void init() {					//TODO: write location finding
+void init() {
 	main_map = (char**)map;
 	max_x = MAX_X;
 	max_y = MAX_Y;
@@ -14,7 +14,7 @@ void init() {					//TODO: write location finding
 		monster_map[i] = (char*)malloc(max_x*sizeof(char));
 		memcpy( monster_map[i], main_map[i], max_x*sizeof(char));
 	}
-	
+
 	treasure_db = NULL;
 	monster_db = NULL;
 	scan_for_treasures(treasure_db, (char**)map);
