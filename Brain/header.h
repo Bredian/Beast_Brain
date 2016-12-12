@@ -66,5 +66,6 @@ path trace_with_monsters(point trace_to, char **monster_map, char **map);
 void monster_zones_update(char **monster_map, monster* monster_db);	//updates 
 
 void init();
+void routine_update();
 
 void do_next_step(int cur_x, int cur_y, int *command);	//main magic here

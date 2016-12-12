@@ -1,4 +1,5 @@
-
+#include <stdlib.h>
+#include <string.h>
 
 #include "header.h"
 
@@ -38,7 +39,7 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 		if( have_path == 1 ) {	//alarms happen once in 5 steps
 			buf.x = cur_x;		//we use them to recalculate the path
 			buf.y = cur_y;
-			wave_scan_to_dist(buf, traced_path.len - steps, main_map);
+			wave_scan_to_dist(buf, traced_path.len - step, main_map);
 			
 			free( traced_path.steps );
 			buf.x = treasure_db[treas].x;
@@ -51,7 +52,7 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 				buf.y = treasure_db[treas].y;
 				traced_path = trace( buf, main_map);	//... we just go straight to treasure
 			}
-		steps = 0;
+		step = 0;
 		}
 	}
 	else {
@@ -80,20 +81,20 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 			}
 		}
 	have_path = 1;
-	steps = 0;
+	step = 0;
 	}
 
 
-	if( cur_x != traced_path[step].x )		//doing step
-		if( cur_x > traced_path[step].x )
+	if( cur_x != traced_path.steps[step].x )		//doing step
+		if( cur_x > traced_path.steps[step].x )
 			*command = 1;
 		else
 			*command = 3;
-	else if( cur_y > traced_path[step].y )
+	else if( cur_y > traced_path.steps[step].y )
 			*command = 4;
 		else
 			*command = 2;
-	steps++;
+	step++;
 	alarm++;
 
 	return;
