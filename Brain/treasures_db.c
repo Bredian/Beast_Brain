@@ -24,3 +24,16 @@ void refresh_treasure_db(treasure* treasure_db, char **map){
 		if( map[treasure_db[i].y][treasure_db[i].x] != '*' ) treasure_db[i].exist = 0;
 	return;
 }
+
+int find_nearest_treasure(point from, treasure* treasure_db){
+	int i, number_of_nearest = 0, min;
+	min = (treasure_db[0].x-from.x) * (treasure_db[0].x-from.x) + (treasure_db[0].y-from.y) * (treasure_db[0].y-from.y);
+	for(i = 0; i < number_of_treasures; i++){
+		if(treasure_db[i].exist == 0) continue;
+		if((treasure_db[i].x-from.x) * (treasure_db[i].x-from.x) + (treasure_db[i].y-from.y) * (treasure_db[i].y-from.y) < min){
+			min = (treasure_db[i].x-from.x) * (treasure_db[i].x-from.x) + (treasure_db[i].y-from.y) * (treasure_db[i].y-from.y);y)
+			number_of_nearest = i;
+		}
+	}
+	return number_of_nearest;
+}
