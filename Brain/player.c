@@ -12,9 +12,9 @@
 //~ #define MAX_X 100
 //~ #define MAX_Y 25
 
-//~ char map[MAX_Y][MAX_X];
-
 #include "brain.h"
+
+char map[MAX_Y][MAX_X];
 
 int main()
 {

@@ -3,25 +3,25 @@
 
 #include "header.h"
 
-const int max_x = MAX_X;
-const int max_y = MAX_Y;
-
-
 
 void init() {
+	extern char map[MAX_Y][MAX_X];
 	printf("Init\n");
 	int i;
 
-	monster_map = (char**)malloc(max_y*sizeof(char*));
-	for(i = 0; i < max_y; i++) {
-		monster_map[i] = (char*)malloc(max_x*sizeof(char));
-		memcpy( monster_map[i], map[i], max_x*sizeof(char));
+	monster_map = (char**)malloc(MAX_Y*sizeof(char*));
+	for(i = 0; i < MAX_Y; i++) {
+		monster_map[i] = (char*)malloc(MAX_X*sizeof(char));
+		memcpy( monster_map[i], map[i], MAX_X*sizeof(char));
 	}
 
 	printf("Monster map copied\n");
 
 	treasure_db = (treasure*)malloc(sizeof(treasure));
 	monster_db = (monster*)malloc(sizeof(monster));
+	//~ treasure_db = NULL;
+	//~ monster_db = NULL;
+	
 	scan_for_treasures(treasure_db);
 	scan_for_monsters(monster_db);
 

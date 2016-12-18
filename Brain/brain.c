@@ -4,6 +4,7 @@
 #include "header.h"
 
 void do_next_step(int cur_x, int cur_y, int *command) {
+	extern char map[MAX_Y][MAX_X];
 	static int treas;
 	static path traced_path;
 	static int have_path = 0, done_init = 0, step = -1, alarm = 0;
@@ -24,17 +25,17 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 
 	
 	if( alarm%5 == 0 )		//copy moster_map from main_map
-		for(i = 0; i < max_y; i++)
-			memcpy( monster_map[i], map[i], max_x*sizeof(char));
+		for(i = 0; i < MAX_Y; i++)
+			memcpy( monster_map[i], map[i], MAX_X*sizeof(char));
 	
-	refresh_monster_db(monster_db, monster_map);
+	refresh_monster_db(monster_db);
 	refresh_treasure_db(treasure_db);
-	printf("flag\n");
 
 
+	printf("Main loop started\n");
 
 
-	if( !have_path || alarm%5 == 0 ) {		//calculating path if already don't have one
+	if( (!have_path) || (alarm%5 == 0) )		//calculating path if already don't have one
 		if( have_path == 1 ) {	//alarms happen once in 5 steps
 			buf.x = cur_x;		//we use them to recalculate the path
 			buf.y = cur_y;
@@ -44,7 +45,7 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 			buf.x = treasure_db[treas].x;
 			buf.y = treasure_db[treas].y;
 			traced_path = trace_with_monsters( buf, monster_map);
-			
+
 			if( traced_path.len == -1 ) {	//if there is no safe path...
 				free( traced_path.steps );
 				buf.x = treasure_db[treas].x;
@@ -53,35 +54,34 @@ void do_next_step(int cur_x, int cur_y, int *command) {
 			}
 		step = 0;
 		}
-	}
-	else {
-		if( traced_path.len != -2 ) free(traced_path.steps);
-		buf.x = cur_x;
-		buf.y = cur_y;
-		treas = wave_scan_to_dist(buf, 15, map);
-		
-		if(treas == -1) {
-			treas = find_nearest_treasure(buf, treasure_db);//if no treasure near us
-			buf1.x = treasure_db[treas].x;
-			buf1.y = treasure_db[treas].y;
-			wave_scan_to_point(buf, buf1 );
-			traced_path = trace( buf1 );//going to the nearest one
-		}
-		else {	//just like the first part
-			buf.x = treasure_db[treas].x;
-			buf.y = treasure_db[treas].y;
-			traced_path = trace_with_monsters( buf, monster_map );
+		else {
+			if( traced_path.len != -2 ) free(traced_path.steps);
+			buf.x = cur_x;
+			buf.y = cur_y;
+			treas = wave_scan_to_dist(buf, 15, map);
 			
-			if( traced_path.len == -1 ) {
-				free( traced_path.steps );
+			if(treas == -1) {
+				treas = find_nearest_treasure(buf, treasure_db);//if no treasure near us
+				buf1.x = treasure_db[treas].x;
+				buf1.y = treasure_db[treas].y;
+				wave_scan_to_point(buf, buf1 );
+				traced_path = trace( buf1 );//going to the nearest one
+			}
+			else {	//just like the first part
 				buf.x = treasure_db[treas].x;
 				buf.y = treasure_db[treas].y;
-				traced_path = trace( buf );
+				traced_path = trace_with_monsters( buf, monster_map );
+				
+				if( traced_path.len == -1 ) {
+					free( traced_path.steps );
+					buf.x = treasure_db[treas].x;
+					buf.y = treasure_db[treas].y;
+					traced_path = trace( buf );
+				}
 			}
+		have_path = 1;
+		step = 0;
 		}
-	have_path = 1;
-	step = 0;
-	}
 
 
 	if( cur_x != traced_path.steps[step].x )		//doing step

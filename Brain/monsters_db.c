@@ -6,14 +6,14 @@ void scan_for_monsters(monster* monster_db) {
 	extern char map[MAX_Y][MAX_X];
 	int i, j;
 	number_of_monsters = 0;
-	for(i = 0; i < max_y; i++) {
-		for(j = 0; j < max_x; j++) {
+	for(i = 0; i < MAX_Y; i++) {
+		for(j = 0; j < MAX_X; j++) {
 			if( map[i][j] == '@' ){
 				number_of_monsters++;
 				monster_db = realloc(monster_db, number_of_monsters*sizeof(monster));
-				monster_db[number_of_monsters].y = i;
-				monster_db[number_of_monsters].x = j;
-				monster_db[number_of_monsters].alive = 1;
+				monster_db[number_of_monsters - 1].y = i;
+				monster_db[number_of_monsters - 1].x = j;
+				monster_db[number_of_monsters - 1].alive = 1;
 			}
 		}
 	}
@@ -21,7 +21,8 @@ void scan_for_monsters(monster* monster_db) {
 	return;
 }
 
-void refresh_monster_db(monster* monster_db, char **map) {
+void refresh_monster_db(monster* monster_db) {
+	extern char map[MAX_Y][MAX_X];
 	int i, j, x, y;
 	int dx[5] = {0, -1, 0, 1, 0};	//step from current position to
 	int dy[5] = {0, 0, 1, 0, -1};	//nowhere, left, up, right, down

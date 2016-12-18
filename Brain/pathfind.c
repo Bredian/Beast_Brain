@@ -26,7 +26,7 @@ path trace(point trace_to) {
 		for (i = 0; i < 4; i++)
 		{
 			int iy=y + dy[i], ix = x + dx[i];
-			if ( iy >= 0 && iy < max_y && ix >= 0 && ix < max_x && map[iy][ix] == 'A' + d)
+			if ( iy >= 0 && iy < MAX_Y && ix >= 0 && ix < MAX_X && map[iy][ix] == 'A' + d)
 			{
 				x = x + dx[i];
 				y = y + dy[i];           // переходим в ячейку, которая на 1 ближе к старту
@@ -66,7 +66,7 @@ path trace_with_monsters(point trace_to, char **monster_map) {
 		{
 			iy = y + dy[i];
 			ix = x + dx[i];
-			if ( iy >= 0 && iy < max_y && ix >= 0 && ix < max_x && map[iy][ix] + 'A' + 5 - monster_map[iy][ix] ==  d)	//our steps + 5 from monster_zones_update + 'A' offset -
+			if ( iy >= 0 && iy < MAX_Y && ix >= 0 && ix < MAX_X && map[iy][ix] + 'A' + 5 - monster_map[iy][ix] ==  d)	//our steps + 5 from monster_zones_update + 'A' offset -
 			{																												//- monster's steps to the point
 				x = x + dx[i];
 				y = y + dy[i];           // переходим в ячейку, которая на 1 ближе к старту
