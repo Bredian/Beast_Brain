@@ -3,6 +3,7 @@
 /* wave functions */
 
 int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of treasures in range
+	//extern char map[MAX_Y][MAX_X];
 	int d, i, x, y, number = -1;
 	int stop_flag = 0, treas_flag = 0;
 
@@ -18,28 +19,28 @@ int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of tr
 
 
 	d = 0;
-	map[from.x][from.y] = 'A';
+	*(*(map + from.x) + from.y) = 'A';
 	do {
 		stop_flag = 1;               // предполагаем, что все свободные клетки уже помечены
 		for ( y = 0; y < max_y; y++ )
 			for ( x = 0; x < max_x; x++ )
-				if ( map[y][x] == 'A' + d )                         // ячейка (x, y) помечена числом d
+				if ( *(*(map + y) + x) == 'A' + d )                         // ячейка (x, y) помечена числом d
 				{
 					for ( i = 0; i < 4; i++ )                    // проходим по всем непомеченным соседям
 					{
 						iy = y + dy[i];
 						ix = x + dx[i];
-						if ( iy >= 0 && iy < max_y && ix >= 0 && ix < max_x && map[iy][ix] != '#' && map[iy][ix] < 'A' )
+						if ( iy >= 0 && iy < max_y && ix >= 0 && ix < max_x && *(*(map + iy) + ix) != '#' && *(*(map + iy) + ix) < 'A' )
 					{
 							stop_flag = 0;              // найдены непомеченные клетки
 
-							if(map[iy][ix] == '*' && !treas_flag) {
+							if(*(*(map + iy) + ix) == '*' && !treas_flag) {
 								nearest_treasure.x = x;
 								nearest_treasure.y = y;
 								treas_flag = 1;
 							}
 
-							map[iy][ix] = 'A' + d + 1;      // распространяем волну
+							*(*(map + iy) + ix) = 'A' + d + 1;      // распространяем волну
 						}
 					}
 				}
@@ -53,7 +54,8 @@ int wave_scan_to_dist(point from, int dist, char** map) {	//returns number of tr
 	return number;
 }
 
-int wave_scan_to_point(point from, point to, char **map){	//returns number of steps
+int wave_scan_to_point(point from, point to){	//returns number of steps
+	extern char map[MAX_Y][MAX_X];
 	int d, i, x, y;
 	int stop_flag = 0;
 

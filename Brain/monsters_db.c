@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include "header.h"
 
-void scan_for_monsters(monster* monster_db, char **map){
+void scan_for_monsters(monster* monster_db) {
+	printf("Scanning for monsters\n");
+	extern char map[MAX_Y][MAX_X];
 	int i, j;
 	number_of_monsters = 0;
 	for(i = 0; i < max_y; i++) {
@@ -15,6 +17,7 @@ void scan_for_monsters(monster* monster_db, char **map){
 			}
 		}
 	}
+	printf("Done\n");
 	return;
 }
 
@@ -26,7 +29,7 @@ void refresh_monster_db(monster* monster_db, char **map) {
 	for(i = 0; i < number_of_monsters; i++) {
 		if(monster_db[i].alive == 0) continue;
  		for(j = 0; j < 5; j++) {
-			if( map[monster_db[i].y + dy[j]][monster_db[i].x + dx[j]] == '@' ) {
+			if( *(*(map + monster_db[i].y + dy[j]) + monster_db[i].x + dx[j]) == '@' ) {
 				monster_db[i].x = monster_db[i].x + dx[j];
 				monster_db[i].y = monster_db[i].y + dy[j];
 				break;

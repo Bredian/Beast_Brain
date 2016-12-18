@@ -2,7 +2,8 @@
 
 #include "header.h"
 
-path trace(point trace_to, char **map) {
+path trace(point trace_to) {
+	extern char map[MAX_Y][MAX_X];
 	int d, i, x, y;
 	int ix, iy;
 
@@ -37,7 +38,8 @@ path trace(point trace_to, char **map) {
 	return to_ret;
 }
 
-path trace_with_monsters(point trace_to, char **monster_map, char **map) {
+path trace_with_monsters(point trace_to, char **monster_map) {
+	extern char map[MAX_Y][MAX_X];
 	int d, i, x, y;
 	int ix, iy;
 	int no_way;
